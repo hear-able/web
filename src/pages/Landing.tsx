@@ -5,7 +5,6 @@ import {
   AudioLines,
   BookOpenText,
   ChartNoAxesColumnIncreasing,
-  CircleHelp,
   Download,
   Ear,
   FileAudio,
@@ -14,9 +13,7 @@ import {
   Layers,
   Menu,
   Mic,
-  School,
   Sparkles,
-  Stethoscope,
   X,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
@@ -49,24 +46,6 @@ const featureChips: { icon: LucideIcon; label: string }[] = [
 ]
 
 const audiences = ['#SiswaTunarungu', '#SiswaKurangDengar', '#PenggunaAlatBantuDengar', '#Guru&Pendidik', '#Keluarga&Pendamping', '#Relawan']
-
-const problems: { icon: LucideIcon; title: string; text: string }[] = [
-  {
-    icon: School,
-    title: 'Metode kelas yang seragam',
-    text: 'Pembelajaran jarang disesuaikan dengan kondisi tiap siswa, sehingga siswa tunarungu dan kurang dengar mudah tertinggal.',
-  },
-  {
-    icon: CircleHelp,
-    title: 'Latihan mandiri tanpa arahan',
-    text: 'Berlatih sendiri itu sulit jika tidak tahu bagian mana yang sudah tepat dan mana yang perlu diperbaiki.',
-  },
-  {
-    icon: Stethoscope,
-    title: 'Terapis tidak selalu terjangkau',
-    text: 'Akses harian ke terapis wicara profesional masih terbatas, padahal latihan perlu dilakukan rutin.',
-  },
-]
 
 const steps = [
   {
