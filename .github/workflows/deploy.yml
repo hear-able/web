@@ -1,0 +1,56 @@
+name: Deployment
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  IMAGE_NAME: hearable-web
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: build image
+        run: docker build -t $IMAGE_NAME .
+
+      - name: login to registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: push image
+        run: |
+          IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+          echo "IMAGE_ID=$IMAGE_ID" >> "$GITHUB_ENV"
+          
+          docker tag $IMAGE_NAME $IMAGE_ID
+          docker push $IMAGE_ID:latest
+
+
+      - name: deploy to server
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/vps_key
+          chmod 600 ~/.ssh/vps_key
+          
+          ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+          
+          ssh -vvv -T -i ~/.ssh/vps_key "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" << EOF
+          echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u "${{ secrets.GHCR_USERNAME }}" --password-stdin
+          
+            docker pull $IMAGE_ID:latest
+          
+            docker stop $IMAGE_NAME || true
+            docker rm $IMAGE_NAME || true
+            docker run -d \
+              --name $IMAGE_NAME \
+              --restart unless-stopped \
+              -p ${{ secrets.VPS_PORT }}:8080 \
+              $IMAGE_ID:latest
+          EOF
