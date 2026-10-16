@@ -97,7 +97,7 @@ export function ResultView({ module, onAgain }: { module: CreatedModule; onAgain
         </span>
         <h1 className="mt-5 text-2xl font-bold text-ink">Modul berhasil dikirim!</h1>
         <p className="mt-2 text-muted">
-          <span className="font-semibold text-ink">{module.title}</span> sudah tersedia untuk pengguna Hear-able. Terima kasih!
+          <span className="font-semibold text-ink">{module.title}</span> sudah tersedia untuk pengguna HearAble. Terima kasih!
         </p>
       </div>
 

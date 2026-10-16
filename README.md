@@ -1,4 +1,4 @@
-# Hear-able web
+# HearAble web
 
 React + Vite + Tailwind CSS v4. Contains the public landing page and the volunteer portal (`/relawan`).
 

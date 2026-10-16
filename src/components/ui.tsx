@@ -9,7 +9,7 @@ export function Brand({ className }: { className?: string }) {
   return (
     <Link to="/" className={cx('inline-flex items-center gap-2 rounded-lg font-extrabold tracking-tight text-navy', className)}>
       <img src={logo} alt="" className="h-8 w-auto" />
-      <span className="text-lg">Hear-able</span>
+      <span className="text-lg">HearAble</span>
     </Link>
   )
 }

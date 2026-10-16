@@ -87,7 +87,7 @@ export function LoginPage() {
   }
 
   return (
-    <AuthLayout title="Masuk sebagai relawan" subtitle="Lanjutkan berbagi materi latihan untuk pengguna Hear-able.">
+    <AuthLayout title="Masuk sebagai relawan" subtitle="Lanjutkan berbagi materi latihan untuk pengguna HearAble.">
       <form onSubmit={submit} className="flex flex-col gap-5" noValidate>
         {error && <Alert>{error}</Alert>}
         <Input label="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" placeholder="contoh@email.com" required />
@@ -148,7 +148,7 @@ export function RegisterPage() {
           <input type="checkbox" checked={accept} onChange={(e) => setAccept(e.target.checked)} className="mt-0.5 size-5 shrink-0 accent-teal-500" />
           <span>
             Saya menyetujui <span className="font-semibold text-teal-700">Ketentuan Layanan</span> dan{' '}
-            <span className="font-semibold text-teal-700">Kebijakan Privasi</span> Hear-able, termasuk penggunaan materi yang saya unggah untuk latihan.
+            <span className="font-semibold text-teal-700">Kebijakan Privasi</span> HearAble, termasuk penggunaan materi yang saya unggah untuk latihan.
           </span>
         </label>
         <Button type="submit" size="lg" loading={loading}>
